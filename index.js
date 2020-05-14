@@ -57,3 +57,23 @@ test('Widening the time filter should show all the periods', async t => {
     .expect(p.textContent)
     .match(/^Click a period to select it/) // no periods filtered
 })
+
+test('After filtering by place, first row label should match', async t => {
+  const periodList = ReactSelector('LayoutBlock').withProps('id', 'PeriodList')
+      , firstRow = periodList.findReact('ItemRow')
+      , spatialCoverage = firstRow.find('span').nth(5)
+
+  const placeFilter = ReactSelector('LayoutBlock').withProps('id', 'PlaceFilter')
+      , selectPlacesLink = placeFilter.find('a')
+
+  const placeSuggest = ReactSelector('UI:PlaceSuggest')
+      , input = placeSuggest.find('input[type="text"]')
+
+  await t
+      .click(selectPlacesLink)
+      .typeText(input, 'denmark')
+      .pressKey('down')
+      .pressKey('enter')
+      .expect(spatialCoverage.textContent)
+      .contains('Denmark')
+})
