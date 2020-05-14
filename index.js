@@ -1,79 +1,44 @@
-import { waitForReact, ReactSelector } from 'testcafe-react-selectors'
+import { waitForReact } from 'testcafe-react-selectors'
+import page from './browse-periods'
 
 const host = process.env.HOST || 'https://client.staging.perio.do'
-    , page = 'backend-home'
     , backendID = encodeURIComponent('web-https://data.perio.do/')
 
 fixture('Browse canonical periods')
-  .page(`${ host }?page=${ page }&backendID=${ backendID }`)
+  .page(`${ host }?page=backend-home&backendID=${ backendID }`)
   .beforeEach(async () => { await waitForReact() })
 
-test('Breadcrumb should say Canonical', async t => {
-  await t.expect(
-    ReactSelector('UI:Breadcrumb')
-      .findReact('li')
-      .innerText
-  ).eql('Canonical')
+test('First breadcrumb should say Can!onical', async t => {
+  await t.expect(page.firstBreadcrumb.innerText).eql('Canonical')
 })
 
 test('After filtering by label, first row label should match', async t => {
-  const periodList = ReactSelector('LayoutBlock').withProps('id', 'PeriodList')
-      , firstRow = periodList.findReact('ItemRow')
-      , label = firstRow.find('span').nth(2)
-
-  const search = ReactSelector('LayoutBlock').withProps('id', 'Search')
-      , input = search.find('input[type="text"]')
-
+  await page.setLabelFilter('bronze')
   await t
-    .typeText(input, 'bronze')
-    .expect(label.textContent)
+    .expect(page.periodList.firstRow.label.textContent)
     .contains('Bronze')
 })
 
-test('Periods starting < 50000BC should be filtered', async t => {
-  const periodList = ReactSelector('LayoutBlock').withProps('id', 'PeriodList')
-      , label = periodList.findReact('label')
-      , p = periodList.findReact('p')
-
+test('Periods starting < 50000BC should be filtered by default', async t => {
   await t
-    .expect(label.textContent)
+    .expect(page.periodList.periodsShown.textContent)
     .match(/^[1-9]\d* periods$/, { timeout: 5000 }) // >0 periods shown
-    .expect(p.textContent)
+    .expect(page.periodList.periodsFiltered.textContent)
     .match(/^[1-9]\d* periods not shown/)           // >0 periods filtered
 })
 
 test('Widening the time filter should show all the periods', async t => {
-  const periodList = ReactSelector('LayoutBlock').withProps('id', 'PeriodList')
-      , label = periodList.findReact('label')
-      , p = periodList.findReact('p')
-
-  const slider = ReactSelector('UI:TimeSlider')
-      , rail = slider.findReact('Rail')
-
+  await page.setWidestTimeFilter()
   await t
-    .click(rail, { offsetX: 5 })           // click left edge of rail
-    .expect(label.textContent)
+    .expect(page.periodList.periodsShown.textContent)
     .match(/^[1-9]\d* periods$/)           // >0 periods shown
-    .expect(p.textContent)
+    .expect(page.periodList.periodsFiltered.textContent)
     .match(/^Click a period to select it/) // no periods filtered
 })
 
 test('After filtering by place, first row label should match', async t => {
-  const periodList = ReactSelector('LayoutBlock').withProps('id', 'PeriodList')
-      , firstRow = periodList.findReact('ItemRow')
-      , spatialCoverage = firstRow.find('span').nth(5)
-
-  const placeFilter = ReactSelector('LayoutBlock').withProps('id', 'PlaceFilter')
-      , selectPlacesLink = placeFilter.find('a')
-
-  const placeSuggest = ReactSelector('UI:PlaceSuggest')
-      , input = placeSuggest.find('input[type="text"]')
-
+  await page.setPlaceFilter('denmark')
   await t
-      .click(selectPlacesLink)
-      .typeText(input, 'denmark')
-      .pressKey('down')
-      .pressKey('enter')
-      .expect(spatialCoverage.textContent)
+      .expect(page.periodList.firstRow.spatialCoverage.textContent)
       .contains('Denmark')
 })
