@@ -8,7 +8,7 @@ fixture('Browse canonical periods')
   .page(`${ host }?page=backend-home&backendID=${ backendID }`)
   .beforeEach(async () => { await waitForReact() })
 
-test('First breadcrumb should say Can!onical', async t => {
+test('First breadcrumb should say Canonical', async t => {
   await t.expect(page.firstBreadcrumb.innerText).eql('Canonical')
 })
 
@@ -22,7 +22,7 @@ test('After filtering by label, first row label should match', async t => {
 test('Periods starting < 50000BC should be filtered by default', async t => {
   await t
     .expect(page.periodList.periodsShown.textContent)
-    .match(/^[1-9]\d* periods$/, { timeout: 5000 }) // >0 periods shown
+    .match(/^[1-9]\d* periods$/, { timeout: 6000 }) // >0 periods shown
     .expect(page.periodList.periodsFiltered.textContent)
     .match(/^[1-9]\d* periods not shown/)           // >0 periods filtered
 })

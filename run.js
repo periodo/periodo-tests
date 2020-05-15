@@ -1,5 +1,10 @@
 const createTestCafe = require('testcafe')
-    , ssl = require('openssl-self-signed-certificate')
+    , { readFileSync } = require('fs')
+
+const ssl = {
+  cert: readFileSync('./localhost+2.pem', { encoding: 'utf8' }),
+  key: readFileSync('./localhost+2-key.pem', { encoding: 'utf8' }),
+}
 
 let testcafe = null
 
@@ -10,10 +15,11 @@ createTestCafe('localhost', 1337, 1338, ssl)
   })
   .then(runner => runner
     .src('index.js')
-    // Browsers restrict self-signed certificate usage unless you
-    // explicitly set a flag specific to each browser.
-    // For Chrome, this is '--allow-insecure-localhost'.
-    .browsers('chrome --allow-insecure-localhost')
+    .browsers([
+      'chrome',
+      'firefox',
+      'safari',
+    ])
     .run()
   )
   .then(() => {
