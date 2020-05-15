@@ -38,8 +38,8 @@ class Facet {
 }
 
 class PeriodDetails {
-  constructor (details) {
-    this.originalLabel = details.findReact('Field').withProps(
+  constructor () {
+    this.originalLabel = ReactSelector('Field').withProps(
       { value: { id: 'Original label' }}
     ).find('dd')
   }
@@ -68,9 +68,7 @@ class BrowsePeriods {
         ReactSelector('AspectTable').withProps('aspectID', facet)
       )
     }
-    this.periodDetails = new PeriodDetails(
-      ReactSelector('PeriodDetail')
-    )
+    this.periodDetails = new PeriodDetails()
   }
 
   async setLabelFilter (query) {

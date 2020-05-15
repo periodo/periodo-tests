@@ -62,8 +62,8 @@ test('Selecting a facet value should update other facets', async t => {
 
 test('Clicking a row should show its details below', async t => {
   await page.periodList.firstRow.click()
-  const originalLabel = await page.periodDetails.originalLabel()
+  const label = await page.periodDetails.originalLabel()
   await t
     .expect(page.periodList.firstRow.label.textContent)
-    .eql(originalLabel.textContent)
+    .eql(label.textContent)
 })
