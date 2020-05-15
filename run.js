@@ -1,5 +1,6 @@
 const createTestCafe = require('testcafe')
     , { readFileSync } = require('fs')
+    , { platform } = require('os')
 
 const ssl = {
   cert: readFileSync('./localhost+2.pem', { encoding: 'utf8' }),
@@ -8,6 +9,12 @@ const ssl = {
 
 let testcafe = null
 
+const browsers = [ 'chrome', 'firefox' ]
+
+if (platform() === 'darwin') {
+  browsers.push('safari')
+}
+
 createTestCafe('localhost', 1337, 1338, ssl)
   .then(tc => {
     testcafe = tc
@@ -15,11 +22,7 @@ createTestCafe('localhost', 1337, 1338, ssl)
   })
   .then(runner => runner
     .src('index.js')
-    .browsers([
-      'chrome',
-      'firefox',
-      'safari',
-    ])
+    .browsers(browsers)
     .run()
   )
   .then(() => {

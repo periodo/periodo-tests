@@ -7,8 +7,7 @@
     "testcafe": "^1.8.4",
     "testcafe-react-selectors": "^4.0.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "node run.js"
+    "test": "make run"
   }
 }
