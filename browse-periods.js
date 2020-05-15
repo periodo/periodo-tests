@@ -6,6 +6,10 @@ class PeriodRow {
     this.label = row.find('span').nth(2)
     this.spatialCoverage = row.find('span').nth(5)
   }
+
+  async click () {
+    await t.click(this.label)
+  }
 }
 
 class PeriodList {
@@ -33,6 +37,14 @@ class Facet {
   }
 }
 
+class PeriodDetails {
+  constructor (details) {
+    this.originalLabel = details.findReact('Field').withProps(
+      { value: { id: 'Original label' }}
+    ).find('dd')
+  }
+}
+
 class BrowsePeriods {
   constructor () {
     this.firstBreadcrumb = ReactSelector('UI:Breadcrumb').findReact('li')
@@ -56,6 +68,9 @@ class BrowsePeriods {
         ReactSelector('AspectTable').withProps('aspectID', facet)
       )
     }
+    this.periodDetails = new PeriodDetails(
+      ReactSelector('PeriodDetail')
+    )
   }
 
   async setLabelFilter (query) {

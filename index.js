@@ -59,3 +59,11 @@ test('Selecting a facet value should update other facets', async t => {
     .expect(page.facets['spatialCoverage'].values.textContent)
     .eql('Norway')
 })
+
+test('Clicking a row should show its details below', async t => {
+  await page.periodList.firstRow.click()
+  const originalLabel = await page.periodDetails.originalLabel()
+  await t
+    .expect(page.periodList.firstRow.label.textContent)
+    .eql(originalLabel.textContent)
+})
