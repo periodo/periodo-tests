@@ -22,9 +22,9 @@ test('After filtering by label, first row label should match', async t => {
 test('Periods starting < 50000BC should be filtered by default', async t => {
   await t
     .expect(page.periodList.periodsShown.textContent)
-    .match(/^[1-9]\d* periods$/, { timeout: 6000 }) // >0 periods shown
+    .match(/^[1-9]\d* periods$/, { timeout: 12000 }) // >0 periods shown
     .expect(page.periodList.periodsFiltered.textContent)
-    .match(/^[1-9]\d* periods not shown/)           // >0 periods filtered
+    .match(/^[1-9]\d* periods not shown/)            // >0 periods filtered
 })
 
 test('Widening the time filter should show all the periods', async t => {
