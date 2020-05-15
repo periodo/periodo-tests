@@ -11,4 +11,4 @@ before_script:
   - sleep 3
   # - sudo apt-get -y install libnss3-tools
   # - which firefox
-script: MKCERT=./mkcert make run
+script: testcafe chrome index.js #MKCERT=./mkcert make run
