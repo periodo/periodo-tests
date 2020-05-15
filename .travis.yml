@@ -1,6 +1,6 @@
 dist: focal
 addons:
-  firefox: latest
+  # firefox: latest
   chrome: stable
 services:
   - xvfb
@@ -9,6 +9,6 @@ node_js: 'stable'
 before_script:
   - fluxbox >/dev/null 2>&1 &
   - sleep 3
-  - sudo apt-get -y install libnss3-tools
-  - which firefox
+  # - sudo apt-get -y install libnss3-tools
+  # - which firefox
 script: MKCERT=./mkcert make run
