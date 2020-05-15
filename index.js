@@ -39,6 +39,23 @@ test('Widening the time filter should show all the periods', async t => {
 test('After filtering by place, first row label should match', async t => {
   await page.setPlaceFilter('denmark')
   await t
-      .expect(page.periodList.firstRow.spatialCoverage.textContent)
-      .contains('Denmark')
+    .expect(page.periodList.firstRow.spatialCoverage.textContent)
+    .contains('Denmark')
+})
+
+test('Selecting a facet value should update other facets', async t => {
+  await page.facets['authority']
+    .selectValue('Norsk arkeologisk leksikon. 2005.')
+
+  await t
+    .expect(page.facets['language'].values.count)
+    .eql(1)
+    .expect(page.facets['language'].values.textContent)
+    .eql('Norwegian')
+
+  await t
+    .expect(page.facets['spatialCoverage'].values.count)
+    .eql(1)
+    .expect(page.facets['spatialCoverage'].values.textContent)
+    .eql('Norway')
 })

@@ -23,6 +23,16 @@ class PlaceFilter {
   }
 }
 
+class Facet {
+  constructor (facet) {
+    this.values = facet.find('a')
+  }
+
+  async selectValue (value) {
+    await t.click(this.values.withText(value))
+  }
+}
+
 class BrowsePeriods {
   constructor () {
     this.firstBreadcrumb = ReactSelector('UI:Breadcrumb').findReact('li')
@@ -40,6 +50,12 @@ class BrowsePeriods {
     this.periodList = new PeriodList(
       ReactSelector('LayoutBlock').withProps('id', 'PeriodList')
     )
+    this.facets = {}
+    for (const facet of [ 'authority', 'language', 'spatialCoverage' ]) {
+      this.facets[facet] = new Facet(
+        ReactSelector('AspectTable').withProps('aspectID', facet)
+      )
+    }
   }
 
   async setLabelFilter (query) {
