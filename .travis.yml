@@ -10,4 +10,5 @@ before_script:
   - fluxbox >/dev/null 2>&1 &
   - sleep 3
   - sudo apt-get -y install libnss3-tools
+  - which firefox
 script: MKCERT=./mkcert make run

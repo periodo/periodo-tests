@@ -9,7 +9,7 @@ const ssl = {
 
 let testcafe = null
 
-const browsers = [ 'chrome', 'firefox' ]
+const browsers = [ 'chrome' ]//, 'firefox' ]
 
 if (platform() === 'darwin') {
   browsers.push('safari')
