@@ -2,19 +2,17 @@ dist: focal
 addons:
   apt:
     packages:
-    - tree
     - libnss3-tools
-  snaps:
-    - chromium
+  chrome: stable
 services:
   - xvfb
 language: node_js
 node_js: 'stable'
-# before_script:
-#   - fluxbox >/dev/null 2>&1 &
-#   - sleep 3
+before_script:
+  - fluxbox >/dev/null 2>&1 &
+  - sleep 3
 script:
+  - mkdir -p $HOME/.pki/nssdb
+  - certutil -d sql:$HOME/.pki/nssdb -N --empty-password
   - MKCERT=./mkcert make localhost+2.pem localhost+2-key.pem
-  - tree $HOME
-  # - ls -l /snap/chromium/current/.pki/nssdb
-  # - certutil -d sql:/snap/chromium/current/.pki/nssdb -L
+  - certutil -d sql:$HOME/.pki/nssdb -L
