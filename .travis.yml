@@ -13,5 +13,7 @@ before_script:
   - sleep 3
 script:
   - MKCERT=./mkcert make localhost+2.pem localhost+2-key.pem
+  - ls -l $HOME/.pki/nssdb
   - certutil -d sql:$HOME/.pki/nssdb -L
+  - ls -l $HOME/snap/chromium/current/.pki/nssdb
   - certutil -d sql:$HOME/snap/chromium/current/.pki/nssdb -L
