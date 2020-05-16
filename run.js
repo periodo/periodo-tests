@@ -9,7 +9,7 @@ const ssl = {
 
 let testcafe = null
 
-const browsers = [ 'chrome' ]//, 'firefox' ]
+const browsers = [ 'google-chrome-stable --disable-gpu' ]//, 'firefox' ]
 
 if (platform() === 'darwin') {
   browsers.push('safari')
