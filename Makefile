@@ -10,7 +10,7 @@ ifneq ($(MKCERT),mkcert)
 	chmod +x mkcert
 endif
 	sudo $(MKCERT) -install
-	$(MKCERT) localhost 127.0.0.1 ::1
+	sudo $(MKCERT) localhost 127.0.0.1 ::1
 
 run: localhost+2.pem localhost+2-key.pem
 	HOST=$(HOST) node run.js
