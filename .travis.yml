@@ -14,7 +14,5 @@ node_js: 'stable'
 #   - sleep 3
 script:
   - MKCERT=./mkcert make localhost+2.pem localhost+2-key.pem
-  - ls -l $HOME/.pki/nssdb
-  - certutil -d sql:$HOME/.pki/nssdb -L
-  - ls -l $HOME/snap/chromium/current/.pki/nssdb
-  - certutil -d sql:$HOME/snap/chromium/current/.pki/nssdb -L
+  - ls -l /snap/chromium/current/.pki/nssdb
+  - certutil -d sql:/snap/chromium/current/.pki/nssdb -L
