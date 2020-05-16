@@ -9,7 +9,6 @@ language: node_js
 node_js: 'stable'
 before_script:
   - sudo snap install chromium
-  - npx testcafe --list-browsers
-  # - fluxbox >/dev/null 2>&1 &
-  # - sleep 3
-script: pwd #MKCERT=./mkcert make run
+  - fluxbox >/dev/null 2>&1 &
+  - sleep 3
+script: MKCERT=./mkcert make run
