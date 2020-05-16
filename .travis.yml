@@ -7,4 +7,4 @@ node_js: 'stable'
 before_script:
   # - sudo apt-get -y install libnss3-tools
   # - which firefox
-script: MKCERT=./mkcert make run
+script: npx testcafe chrome:headless index.js
