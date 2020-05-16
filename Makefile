@@ -9,7 +9,7 @@ ifneq ($(MKCERT),mkcert)
 	wget $(MKCERT_U)$(MKCERT_V)/mkcert-$(MKCERT_V)-linux-amd64 -O mkcert
 	chmod +x mkcert
 endif
-	$(MKCERT) -install
+	TRUST_STORES=nss $(MKCERT) -install
 	$(MKCERT) localhost 127.0.0.1 ::1
 
 run: localhost+2.pem localhost+2-key.pem
