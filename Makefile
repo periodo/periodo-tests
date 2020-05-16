@@ -5,7 +5,7 @@ MKCERT_V := v1.4.1
 
 OS := $(shell uname | tr '[:upper:]' '[:lower:]')
 
-ifdef $(CI)
+ifdef CI
   ifeq ($(OS),darwin)
   BROWSERS = chrome,safari
   else
