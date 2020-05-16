@@ -11,4 +11,7 @@ before_script:
   - sudo snap install chromium
   - fluxbox >/dev/null 2>&1 &
   - sleep 3
-script: MKCERT=./mkcert make run
+script:
+  - make localhost+2.pem localhost+2-key.pem
+  - certutil -d sql:$HOME/.pki/nssdb -L
+  - certutil -d sql:$HOME/snap/chromium/current/.pki/nssdb -L
