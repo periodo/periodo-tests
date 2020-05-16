@@ -11,7 +11,7 @@ let testcafe = null
 
 const browsers = [{
   path: '/usr/bin/google-chrome-stable',
-  cmd: '--disable-gpu',
+  cmd: '--headless --disable-gpu',
 }]
 
 if (platform() === 'darwin') {
