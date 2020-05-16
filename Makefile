@@ -6,12 +6,14 @@ MKCERT_V := v1.4.1
 OS := $(shell uname | tr '[:upper:]' '[:lower:]')
 
 ifdef CI
+SPEED = 0.5
   ifeq ($(OS),darwin)
   BROWSERS = chrome,safari
   else
   BROWSERS = chrome
   endif
 else
+SPEED = 1
   ifeq ($(OS),darwin)
   BROWSERS = chrome,safari,firefox:userProfile
   else
@@ -31,6 +33,7 @@ run: localhost+2.pem localhost+2-key.pem
 	HOST=$(HOST) npx testcafe \
 	--hostname 127.0.0.1 \
 	--ssl "cert=$(word 1,$^);key=$(word 2,$^);" \
+	--speed $(SPEED) \
 	$(BROWSERS) index.js
 
 help:
