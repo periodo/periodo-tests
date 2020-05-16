@@ -13,7 +13,7 @@ endif
 	sudo $(MKCERT) localhost 127.0.0.1 ::1
 
 run: localhost+2.pem localhost+2-key.pem
-	HOST=$(HOST) node run.js
+	sudo HOST=$(HOST) node run.js
 
 help:
 	@echo "set base URL with HOST env variable; defaults to $(HOST)"
