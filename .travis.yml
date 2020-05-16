@@ -3,14 +3,15 @@ addons:
   apt:
     packages:
     - libnss3-tools
+  snaps:
+    - chromium
 services:
   - xvfb
 language: node_js
 node_js: 'stable'
-before_script:
-  - sudo snap install chromium
-  - fluxbox >/dev/null 2>&1 &
-  - sleep 3
+# before_script:
+#   - fluxbox >/dev/null 2>&1 &
+#   - sleep 3
 script:
   - MKCERT=./mkcert make localhost+2.pem localhost+2-key.pem
   - ls -l $HOME/.pki/nssdb
