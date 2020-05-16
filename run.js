@@ -31,3 +31,6 @@ createTestCafe('localhost', 1337, 1338, ssl)
   .then(() => {
     testcafe.close()
   })
+  .catch(error => {
+    console.error(error)
+  })
