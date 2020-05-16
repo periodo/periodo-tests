@@ -1,6 +1,5 @@
 dist: focal
 addons:
-  chrome: stable
   apt:
     packages:
     - libnss3-tools
@@ -9,6 +8,8 @@ services:
 language: node_js
 node_js: 'stable'
 before_script:
-  - fluxbox >/dev/null 2>&1 &
-  - sleep 3
-script: MKCERT=./mkcert make run
+  - snap install chromium
+  - npx testcafe --list-browsers
+  # - fluxbox >/dev/null 2>&1 &
+  # - sleep 3
+script: pwd #MKCERT=./mkcert make run
