@@ -16,7 +16,7 @@ run: localhost+2.pem localhost+2-key.pem
 	HOST=$(HOST) npx testcafe \
 	--hostname 127.0.0.1 \
 	--ssl "cert=$(word 1,$^);key=$(word 2,$^);" \
-	chrome index.js
+	chrome,firefox index.js
 
 help:
 	@echo "set base URL with HOST env variable; defaults to $(HOST)"

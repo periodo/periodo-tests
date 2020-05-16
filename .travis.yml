@@ -11,7 +11,7 @@ node_js: 'stable'
 before_script:
   - mkdir -p $HOME/.pki/nssdb
   - certutil -d sql:$HOME/.pki/nssdb -N --empty-password
-  # - fluxbox >/dev/null 2>&1 &
-  # - sleep 3
+  - fluxbox >/dev/null 2>&1 &
+  - sleep 3
 script:
   - MKCERT=./mkcert make run
