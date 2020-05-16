@@ -11,4 +11,4 @@ before_script:
   - sleep 3
   # - sudo apt-get -y install libnss3-tools
   # - which firefox
-script: google-chrome-stable --help #MKCERT=./mkcert make run
+script: google-chrome-stable --disable-gpu #MKCERT=./mkcert make run
