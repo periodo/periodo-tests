@@ -14,7 +14,7 @@ endif
 
 run: localhost+2.pem localhost+2-key.pem
 	HOST=$(HOST) npx testcafe \
-	--hostname localhost \
+	--hostname 127.0.0.1 \
 	--ssl "cert=$(word 1,$^);key=$(word 2,$^);" \
 	chrome index.js
 
