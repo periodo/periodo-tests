@@ -2,7 +2,12 @@
 
 [![Build Status](https://travis-ci.com/periodo/periodo-tests.svg?branch=master)](https://travis-ci.com/periodo/periodo-tests)
 
-`make test` runs tests, hopefully.
+`make run` runs tests, hopefully.
+
+Tests run against https://client.staging.perio.do/ by default; to change this set the `HOST` environment variable:
+```
+HOST=http://0.0.0.0:5002/ make run
+```
 
 If you're on macOS, tests should run on Chrome, Safari, and Firefox.
 
