@@ -8,9 +8,9 @@ fixture('Browse canonical periods')
   .page(`${ host }?page=backend-home&backendID=${ backendID }`)
   .beforeEach(async () => { await waitForReact() })
 
-test('First breadcrumb should say Canonical', async t => {
-  await t.expect(page.firstBreadcrumb.innerText).eql('Canonical')
-})
+// test('First breadcrumb should say Canonical', async t => {
+//   await t.expect(page.firstBreadcrumb.innerText).eql('Canonical')
+// })
 
 test('After filtering by label, first row label should match', async t => {
   await page.setLabelFilter('bronze')
