@@ -60,6 +60,13 @@ test('Selecting a facet value should update other facets', async t => {
     .eql('Norway')
 })
 
+test('Map should not be visible after closing period coverage', async t => {
+  await page.closePeriodCoverage()
+  await t
+    .expect(page.map.exists)
+    .notOk()
+})
+
 test('Clicking a row should show its details below', async t => {
   await page.periodList.firstRow.click()
   const label = await page.periodDetails.originalLabel()

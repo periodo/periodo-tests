@@ -59,6 +59,13 @@ class BrowsePeriods {
     this.placeFilter = new PlaceFilter(
       ReactSelector('LayoutBlock').withProps('id', 'PlaceFilter')
     )
+
+    this.periodCoverageSummary = ReactSelector('UI:Summary').nth(1)
+
+    this.map = ReactSelector('UI:WorldMap')
+      .find('div.mapCanvas')
+      .child()
+
     this.periodList = new PeriodList(
       ReactSelector('LayoutBlock').withProps('id', 'PeriodList')
     )
@@ -86,6 +93,10 @@ class BrowsePeriods {
       .typeText(this.placeFilter.input, query)
       .pressKey('down')
       .pressKey('enter')
+  }
+
+  async closePeriodCoverage () {
+    await t.click(this.periodCoverageSummary)
   }
 }
 
