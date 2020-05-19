@@ -30,6 +30,7 @@ class PlaceFilter {
 class Facet {
   constructor (facet) {
     this.values = facet.find('a')
+    this.selectedValues = facet.find('table.selected a')
   }
 
   async selectValue (value) {
@@ -60,7 +61,10 @@ class BrowsePeriods {
       ReactSelector('LayoutBlock').withProps('id', 'PlaceFilter')
     )
 
-    this.periodCoverageSummary = ReactSelector('UI:Summary').nth(1)
+    const summary = ReactSelector('UI:Summary', { timeout: 12000 })
+    this.filterPeriodsSummary = summary.nth(0)
+    this.periodCoverageSummary = summary.nth(1)
+    this.periodListSummary = summary.nth(2)
 
     this.map = ReactSelector('UI:WorldMap')
       .find('div.mapCanvas')
@@ -93,10 +97,6 @@ class BrowsePeriods {
       .typeText(this.placeFilter.input, query)
       .pressKey('down')
       .pressKey('enter')
-  }
-
-  async closePeriodCoverage () {
-    await t.click(this.periodCoverageSummary)
   }
 }
 

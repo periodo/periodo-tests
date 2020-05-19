@@ -61,16 +61,45 @@ test('Selecting a facet value should update other facets', async t => {
 })
 
 test('Map should not be visible after closing period coverage', async t => {
-  await page.closePeriodCoverage()
   await t
+    .click(page.periodCoverageSummary)
     .expect(page.map.exists)
     .notOk()
+})
+
+test('Facets keep state when section is closed/reopened', async t => {
+  const facet = page.facets['authority']
+      , authority = 'Twist, Clint. Atlas of the Celts. 2001.'
+  await facet.selectValue(authority)
+  await t
+    .expect(facet.selectedValues.count)
+    .eql(1)
+    .expect(facet.selectedValues.textContent)
+    .eql(authority)
+    .click(page.filterPeriodsSummary) // close filter section
+    .click(page.filterPeriodsSummary) // reopen filter section
+    .expect(facet.selectedValues.count)
+    .eql(1)
+    .expect(facet.selectedValues.textContent)
+    .eql(authority)
 })
 
 test('Clicking a row should show its details below', async t => {
   await page.periodList.firstRow.click()
   const label = await page.periodDetails.originalLabel()
   await t
+    .expect(page.periodList.firstRow.label.textContent)
+    .eql(label.textContent)
+})
+
+test('Period list keeps state when section is closed/reopened', async t => {
+  await page.periodList.firstRow.click()
+  const label = await page.periodDetails.originalLabel()
+  await t
+    .expect(page.periodList.firstRow.label.textContent)
+    .eql(label.textContent)
+    .click(page.periodListSummary) // close period list section
+    .click(page.periodListSummary) // reopen period list section
     .expect(page.periodList.firstRow.label.textContent)
     .eql(label.textContent)
 })
