@@ -26,4 +26,4 @@ If you get SSL warnings on Firefox:
 2. In Firefox `about://config` set `security.enterprise_roots.enabled` to `true`
 3. You may need to manually import into Firefox the CA root certificate installed by `mkcert`.
 
-Due the the need to manually configure Firefox before it will run the tests, it is excluded from CI runs of the tests.
+Only Chrome is tested when the tests are run under continuous integration (CI). Due to the need to manually configure Firefox before it will run the tests, it is excluded from CI runs. Safari also seems to have trouble running in a CI environment, so it is excluded too.
