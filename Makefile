@@ -6,6 +6,8 @@ MKCERT_V := v1.4.1
 
 OS := $(shell uname | tr '[:upper:]' '[:lower:]')
 
+TIMEOUT := 10000
+
 ifdef CI
   ifeq ($(OS),darwin)
   run: test_chrome test_safari
@@ -30,6 +32,7 @@ localhost+2.pem localhost+2-key.pem: mkcert
 
 test_chrome: BROWSER = chrome
 test_safari: BROWSER = safari
+test_safari: TIMEOUT = 20000
 # need to set userProfile flag on firefox unless/until this PR is merged:
 # https://github.com/DevExpress/testcafe/pull/5077
 test_firefox: BROWSER = firefox:userProfile
@@ -38,6 +41,7 @@ test_firefox test_chrome test_safari: localhost+2.pem localhost+2-key.pem
 	HOST=$(HOST) npx testcafe \
 	--hostname 127.0.0.1 \
 	--ssl "cert=$(word 1,$^);key=$(word 2,$^);" \
+	--selector-timeout $(TIMEOUT) \
 	--stop-on-first-fail \
 	$(BROWSER) $(TESTS)
 

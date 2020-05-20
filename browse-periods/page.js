@@ -61,7 +61,7 @@ class BrowsePeriods {
       ReactSelector('LayoutBlock').withProps('id', 'PlaceFilter')
     )
 
-    const summary = ReactSelector('UI:Summary', { timeout: 12000 })
+    const summary = ReactSelector('UI:Summary')
     this.filterPeriodsSummary = summary.nth(0)
     this.periodCoverageSummary = summary.nth(1)
     this.periodListSummary = summary.nth(2)

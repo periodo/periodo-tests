@@ -10,7 +10,7 @@ class PeriodList {
 
 class ViewAuthority {
   constructor () {
-    this.breadcrumbs = ReactSelector('UI:Breadcrumb', { timeout: 12000 })
+    this.breadcrumbs = ReactSelector('UI:Breadcrumb')
       .findReact('li')
 
     this.timeSliderStartHandle = Selector('.slider-handles').child(0)
