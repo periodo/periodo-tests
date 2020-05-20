@@ -12,12 +12,12 @@ test('First breadcrumb should say Canonical', async t => {
   await t.expect(page.breadcrumbs.nth(0).innerText).eql('Canonical')
 })
 
-test('After filtering by label, first row label should match', async t => {
-  await page.setLabelFilter('bronze')
-  await t
-    .expect(page.periodList.firstRow.label.textContent)
-    .contains('Bronze')
-})
+// test('After filtering by label, first row label should match', async t => {
+//   await page.setLabelFilter('bronze')
+//   await t
+//     .expect(page.periodList.firstRow.label.textContent)
+//     .contains('Bronze')
+// })
 
 test('Periods starting < 50000BC should be filtered by default', async t => {
   await t

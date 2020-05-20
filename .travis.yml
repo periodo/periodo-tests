@@ -2,7 +2,6 @@ os:
   - linux
   - osx
 dist: focal
-osx_image: xcode11.3
 addons:
   apt:
     packages:
