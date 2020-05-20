@@ -6,12 +6,12 @@ MKCERT_V := v1.4.1
 
 OS := $(shell uname | tr '[:upper:]' '[:lower:]')
 
-TIMEOUT := 20000
+TIMEOUT := 10000
 
 ifdef CI # continuous integration server
   ifeq ($(OS),darwin) # macos
-  TIMEOUT := 40000    # travisci macos servers are slow
-  run: test_safari #test_chrome
+  TIMEOUT := 20000    # travis ci macos servers are slow,
+  run: test_chrome    # and safari hangs after the 1st test
   else                # linux
   run: test_chrome
   endif
