@@ -9,6 +9,11 @@ Tests run against https://client.staging.perio.do/ by default; to change this se
 HOST=http://0.0.0.0:5002/ make run
 ```
 
+All tests are run by default; to change this set the `TESTS` environment variable:
+```
+TESTS=browse-*/index.js make run
+```
+
 If you're on macOS, tests should run on Chrome, Safari, and Firefox.
 
 If you're on Linux, tests should run on Chrome and Firefox.

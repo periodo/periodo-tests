@@ -1,4 +1,5 @@
 HOST ?= https://client.staging.perio.do
+TESTS ?= */index.js
 
 MKCERT_U := https://github.com/FiloSottile/mkcert/releases/download/
 MKCERT_V := v1.4.1
@@ -37,7 +38,8 @@ test_firefox test_chrome test_safari: localhost+2.pem localhost+2-key.pem
 	HOST=$(HOST) npx testcafe \
 	--hostname 127.0.0.1 \
 	--ssl "cert=$(word 1,$^);key=$(word 2,$^);" \
-	$(BROWSER) index.js
+	--stop-on-first-fail \
+	$(BROWSER) $(TESTS)
 
 help:
 	@echo "set base URL with HOST env variable; defaults to $(HOST)"
