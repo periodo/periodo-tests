@@ -48,7 +48,7 @@ class PeriodDetails {
 
 class BrowsePeriods {
   constructor () {
-    this.firstBreadcrumb = ReactSelector('UI:Breadcrumb').findReact('li')
+    this.breadcrumbs = ReactSelector('UI:Breadcrumb').findReact('li')
 
     this.labelFilterInput = ReactSelector('LayoutBlock')
       .withProps('id', 'Search')
