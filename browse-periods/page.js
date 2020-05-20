@@ -1,4 +1,5 @@
 import { t } from 'testcafe'
+import { Selector } from 'testcafe'
 import { ReactSelector } from 'testcafe-react-selectors'
 
 class PeriodRow {
@@ -14,16 +15,16 @@ class PeriodRow {
 
 class PeriodList {
   constructor (list) {
-    this.periodsShown = list.findReact('label')
-    this.periodsFiltered = list.findReact('p')
-    this.firstRow = new PeriodRow(list.findReact('ItemRow'))
+    this.periodsShown = list.find('label').nth(0)
+    this.periodsFiltered = list.find('p').nth(0)
+    this.firstRow = new PeriodRow(list.find('div.row').nth(1))
   }
 }
 
 class PlaceFilter {
   constructor (filter) {
-    this.open = filter.find('a')
-    this.input = filter.findReact('UI:PlaceSuggest').find('input[type="text"]')
+    this.open = filter.find('a').nth(0)
+    this.input = filter.find('input[type="text"]').nth(0)
   }
 }
 
@@ -50,16 +51,12 @@ class BrowsePeriods {
   constructor () {
     this.breadcrumbs = ReactSelector('UI:Breadcrumb').findReact('li')
 
-    this.labelFilterInput = ReactSelector('LayoutBlock')
-      .withProps('id', 'Search')
-      .find('input[type="text"]')
+    this.labelFilterInput = Selector('#Search').find('input[type="text"]')
 
     this.timeSliderRail = ReactSelector('UI:TimeSlider')
       .findReact('Rail')
 
-    this.placeFilter = new PlaceFilter(
-      ReactSelector('LayoutBlock').withProps('id', 'PlaceFilter')
-    )
+    this.placeFilter = new PlaceFilter(Selector('#PlaceFilter'))
 
     const summary = ReactSelector('UI:Summary')
     this.filterPeriodsSummary = summary.nth(0)
@@ -70,9 +67,7 @@ class BrowsePeriods {
       .find('div.mapCanvas')
       .child()
 
-    this.periodList = new PeriodList(
-      ReactSelector('LayoutBlock').withProps('id', 'PeriodList')
-    )
+    this.periodList = new PeriodList(Selector('#PeriodList'))
     this.facets = {}
     for (const facet of [ 'authority', 'language', 'spatialCoverage' ]) {
       this.facets[facet] = new Facet(
