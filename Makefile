@@ -11,7 +11,7 @@ TIMEOUT := 20000
 ifdef CI # continuous integration server
   ifeq ($(OS),darwin) # macos
   TIMEOUT := 40000    # travisci macos servers are slow
-  run: test_chrome test_safari
+  run: test_safari #test_chrome
   else                # linux
   run: test_chrome
   endif
