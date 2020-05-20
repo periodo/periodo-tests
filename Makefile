@@ -33,6 +33,7 @@ localhost+2.pem localhost+2-key.pem: mkcert
 
 test_chrome: BROWSER = chrome
 test_safari: BROWSER = safari
+test_safari: TIMEOUT = 30000 # safari is slow
 # need to set userProfile flag on firefox unless/until this PR is merged:
 # https://github.com/DevExpress/testcafe/pull/5077
 test_firefox: BROWSER = firefox:userProfile
