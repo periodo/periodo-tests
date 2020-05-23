@@ -6,11 +6,11 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
     , authorityID = 'p0323gx'
 
 fixture('View authority')
-  .page(`${ host }?page=authority-view&backendID=${ backendID }&authorityID=${ authorityID }`)
+  .page(`${ host }/?page=authority-view&backendID=${ backendID }&authorityID=${ authorityID }`)
   .beforeEach(async () => { await waitForReact() })
 
 test('Second breadcrumb should be authority source', async t => {
-  await t.expect(page.breadcrumbs.nth(1).innerText)
+  await t.expect(page.breadcrumbs.nth(1).textContent)
     .eql('Olivia P. Judson. The energy expansions of evolution. 2017-04-28.')
 })
 

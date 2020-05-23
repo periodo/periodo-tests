@@ -5,11 +5,11 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
     , backendID = encodeURIComponent('web-https://data.perio.do/')
 
 fixture('Browse canonical periods')
-  .page(`${ host }?page=backend-home&backendID=${ backendID }`)
+  .page(`${ host }/?page=backend-home&backendID=${ backendID }`)
   .beforeEach(async () => { await waitForReact() })
 
 test('First breadcrumb should say Canonical', async t => {
-  await t.expect(page.breadcrumbs.nth(0).innerText).eql('Canonical')
+  await t.expect(page.breadcrumbs.nth(0).textContent).eql('Canonical')
 })
 
 test('After filtering by label, first row label should match', async t => {

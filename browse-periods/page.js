@@ -1,5 +1,4 @@
-import { t } from 'testcafe'
-import { Selector } from 'testcafe'
+import { t, Selector } from 'testcafe'
 import { ReactSelector } from 'testcafe-react-selectors'
 
 class PeriodRow {
