@@ -18,7 +18,10 @@ class DataSource {
 
 class BackendForm {
   constructor (form) {
+    this.dataSourceTypeSelect = form.find('select')
+    this.dataSourceTypeOption = this.dataSourceTypeSelect.find('option')
     this.dataSourceLabelInput = form.find('input[name="label"]').nth(0)
+    this.dataSourceURLInput = form.find('input[name="url"]').nth(0)
     this.addButton = form.find('button').withExactText('Add')
     this.deleteButton = form.find('button').withExactText('Delete')
   }
@@ -36,7 +39,7 @@ class AuthorityForm {
 class Select {
   constructor (select) {
     this.button = select
-    this.currentHost = select.find('h4').withExactText('Current host')
+    this.option =  select.find('h4')
   }
 }
 
@@ -47,7 +50,7 @@ class Page {
     this.authorityForm = new AuthorityForm(ReactSelector('AuthorityForm'))
     this.menu = new Menu(ReactSelector('Menu'))
     this.dataSourceSelect = new Select(ReactSelector('BackendSelector'))
-    this.changeSummary = ReactSelector('Compare').find('li')
+    this.changeSummary = Selector('div.section').find('li').nth(0)
     this.selectAll = ReactSelector('ToggleSelectAll')
     this.continueButton = ReactSelector('UI:Button$Primary')
     this.getURL = ClientFunction(() => window.location.href)
@@ -57,9 +60,18 @@ class Page {
     return new DataSource(Selector('a').withExactText(name).parent(0))
   }
 
-  async addDataSource(name) {
+  async addLocalDataSource(name) {
     await t
       .typeText(this.backendForm.dataSourceLabelInput, name)
+      .click(this.backendForm.addButton)
+  }
+
+  async addWebDataSource(name, url) {
+    await t
+      .click(this.backendForm.dataSourceTypeSelect)
+      .click(this.backendForm.dataSourceTypeOption.withText('Web (read-only)'))
+      .typeText(this.backendForm.dataSourceLabelInput, name)
+      .typeText(this.backendForm.dataSourceURLInput, url)
       .click(this.backendForm.addButton)
   }
 
