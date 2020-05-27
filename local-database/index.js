@@ -53,3 +53,24 @@ test('Add an authority to local database', async t => {
   .after( async () => {
     await page.deleteDataSource(rando)
   })
+
+test('Import changes', async t => {
+  await t
+    .click(page.menu.importChangesLink)
+    .expect(page.getURL())
+    .contains(`${ host }/?page=backend-sync&backendID=local-`)
+    .click(page.dataSourceSelect.button)
+    .click(page.dataSourceSelect.currentHost)
+    .expect(page.changeSummary.textContent)
+    .contains('Added authority (')
+    .click(page.selectAll)
+    .click(page.continueButton)
+    .click(page.continueButton) // accept changes
+    .expect(page.getURL())
+    .contains(`${ host }/?page=backend-home&backendID=local-`)
+    .expect(page.breadcrumbs.nth(0).textContent)
+    .eql(rando)
+})
+  .after( async () => {
+    await page.deleteDataSource(rando)
+  })

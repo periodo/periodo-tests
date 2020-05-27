@@ -5,6 +5,7 @@ class Menu {
   constructor (menu) {
     this.dataSourcesLink = menu.find('a').withExactText('Data sources')
     this.addAuthorityLink = menu.find('a').withExactText('Add authority')
+    this.importChangesLink = menu.find('a').withExactText('Import changes')
   }
 }
 
@@ -32,12 +33,23 @@ class AuthorityForm {
   }
 }
 
+class Select {
+  constructor (select) {
+    this.button = select
+    this.currentHost = select.find('h4').withExactText('Current host')
+  }
+}
+
 class Page {
   constructor () {
     this.breadcrumbs = ReactSelector('UI:Breadcrumb').find('li')
     this.backendForm = new BackendForm(ReactSelector('BackendForm'))
     this.authorityForm = new AuthorityForm(ReactSelector('AuthorityForm'))
     this.menu = new Menu(ReactSelector('Menu'))
+    this.dataSourceSelect = new Select(ReactSelector('BackendSelector'))
+    this.changeSummary = ReactSelector('Compare').find('li')
+    this.selectAll = ReactSelector('ToggleSelectAll')
+    this.continueButton = ReactSelector('UI:Button$Primary')
     this.getURL = ClientFunction(() => window.location.href)
   }
 
