@@ -13,7 +13,7 @@ ifdef CI # continuous integration server
   TIMEOUT := 20000    # travis ci macos servers are slow,
   run: test_chrome    # and safari hangs after the 1st test
   else                # linux
-  run: test_chrome
+  run: test_chrome test_firefox
   endif
 else     # development desktop
   ifeq ($(OS),darwin) # macos
@@ -34,9 +34,7 @@ localhost+2.pem localhost+2-key.pem: mkcert
 test_chrome: BROWSER = chrome
 test_safari: BROWSER = safari
 test_safari: TIMEOUT = 30000 # safari is slow
-# need to set userProfile flag on firefox unless/until this PR is merged:
-# https://github.com/DevExpress/testcafe/pull/5077
-test_firefox: BROWSER = firefox:userProfile
+test_firefox: BROWSER = firefox
 
 test_firefox test_chrome test_safari: localhost+2.pem localhost+2-key.pem
 	HOST=$(HOST) npx testcafe \
