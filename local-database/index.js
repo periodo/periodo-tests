@@ -6,47 +6,66 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
     , testSource = `test-${ rando }`
     , stagingSource = `staging-${ rando }`
 
+
+// These tests are currently disabled for firefox, because testcafe is
+// unable to handle the dialog that appears to request permission for
+// persistent storage.
+//
+// TODO: figure out a workaround or wait for a solution from testcafe
+
 fixture('Work with a local database')
   .page(`${ host }/?page=open-backend`)
   .beforeEach(async t => {
+    if (t.browser.alias.startsWith('firefox')) return // TODO
     await waitForReact()
     await page.addWebDataSource(stagingSource, 'https://data.staging.perio.do')
     await t.click(page.menu.dataSourcesLink)
     await page.addLocalDataSource(testSource)
   })
-  .afterEach(async () => {
+  .afterEach(async t => {
+    if (t.browser.alias.startsWith('firefox')) return // TODO
     await page.deleteDataSource(testSource)
     await page.deleteDataSource(stagingSource)
   })
 
 test('Add a local database', async t => {
-  await t
-    .expect(page.getURL())
-    .contains(`${ host }/?page=backend-home&backendID=local-`)
+  // TODO: get this test passing on firefox
+  if (! t.browser.alias.startsWith('firefox')) {
+    await t
+      .expect(page.getURL())
+      .contains(`${ host }/?page=backend-home&backendID=local-`)
+  } else {
+    console.error('Currently broken on Firefox, skipping test')
+  }
 })
 
 test('Add an authority to local database', async t => {
-  await t
-    .click(page.menu.addAuthorityLink)
-    .expect(page.getURL())
-    .contains(`${ host }/?page=backend-add-authority&backendID=local-`)
-    .typeText(
-      page.authorityForm.ldInput,
-      'http://www.worldcat.org/oclc/881466843'
-    )
-    .click(page.authorityForm.ldButton)
-    .click(page.authorityForm.saveButton)
-    .expect(page.getURL())
-    .contains(`${ host }/?page=authority-view&backendID=local-`)
-    .expect(page.breadcrumbs.nth(0).textContent)
-    .eql(testSource)
-    .expect(page.breadcrumbs.nth(1).textContent)
-    .contains('Emma Goldman. Emma Goldman : a documentary history of the')
+  // TODO: get this test passing on firefox
+  if (! t.browser.alias.startsWith('firefox')) {
+    await t
+      .click(page.menu.addAuthorityLink)
+      .expect(page.getURL())
+      .contains(`${ host }/?page=backend-add-authority&backendID=local-`)
+      .typeText(
+        page.authorityForm.ldInput,
+        'http://www.worldcat.org/oclc/881466843'
+      )
+      .click(page.authorityForm.ldButton)
+      .click(page.authorityForm.saveButton)
+      .expect(page.getURL())
+      .contains(`${ host }/?page=authority-view&backendID=local-`)
+      .expect(page.breadcrumbs.nth(0).textContent)
+      .eql(testSource)
+      .expect(page.breadcrumbs.nth(1).textContent)
+      .contains('Emma Goldman. Emma Goldman : a documentary history of the')
+  } else {
+    console.error('Currently broken on Firefox, skipping test')
+  }
 })
 
 test('Import changes', async t => {
-  // TODO: get this test passing on safari
-  if (! t.browser.alias.startsWith('safari')) {
+  // TODO: get this test passing on safari and firefox
+  if (t.browser.alias.startsWith('chrome')) {
     await t
       .click(page.menu.importChangesLink)
       .expect(page.getURL())
@@ -63,6 +82,6 @@ test('Import changes', async t => {
       .expect(page.breadcrumbs.nth(0).textContent)
       .eql(testSource)
   } else {
-    console.error('Currently broken on Safari, skipping test')
+    console.error('Currently broken on Safari and Firefox, skipping test')
   }
 })
