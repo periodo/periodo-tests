@@ -22,7 +22,7 @@ class PeriodList {
 
 class PlaceFilter {
   constructor (filter) {
-    this.open = filter.find('a').nth(0)
+    this.open = filter.find('span[role="button"]').nth(0)
     this.input = filter.find('input[type="text"]').nth(0)
   }
 }
