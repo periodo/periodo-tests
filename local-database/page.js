@@ -29,7 +29,7 @@ class BackendForm {
 
 class AuthorityForm {
   constructor (form) {
-    const ldInput =  form.findReact('LinkedDataSourceForm')
+    const ldInput =  form.findReact('LDInput')
     this.ldInput = ldInput.find('textarea')
     this.ldButton = ldInput.find('button')
     this.saveButton = form.find('button').withExactText('Save')
