@@ -29,7 +29,7 @@ class BackendForm {
 
 class AuthorityForm {
   constructor (form) {
-    const ldInput =  form.findReact('LDInput')
+    const ldInput =  form.findReact('LinkedDataSourceForm')
     this.ldInput = ldInput.find('textarea')
     this.ldButton = ldInput.find('button')
     this.saveButton = form.find('button').withExactText('Save')
@@ -48,11 +48,12 @@ class Page {
     this.breadcrumbs = ReactSelector('UI:Breadcrumb').find('li')
     this.backendForm = new BackendForm(ReactSelector('BackendForm'))
     this.authorityForm = new AuthorityForm(ReactSelector('AuthorityForm'))
-    this.menu = new Menu(ReactSelector('Menu'))
+    this.menu = new Menu(ReactSelector('UI:NavigationMenu'))
     this.dataSourceSelect = new Select(ReactSelector('BackendSelector'))
     this.changeSummary = Selector('div.section').find('li').nth(0)
     this.selectAll = ReactSelector('ToggleSelectAll')
-    this.continueButton = ReactSelector('UI:Button$Primary')
+    this.continueButton = ReactSelector('UI:Button')
+      .withProps('variant', 'primary')
     this.getURL = ClientFunction(() => window.location.href)
   }
 

@@ -4,7 +4,7 @@ import { ReactSelector } from 'testcafe-react-selectors'
 class PeriodList {
   constructor (list) {
     this.periodsShown = list.find('label').nth(0)
-    this.periodsFiltered = list.find('p').nth(0)
+    this.periodsFiltered = this.periodsShown.sibling(0)
   }
 }
 

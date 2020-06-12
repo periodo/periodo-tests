@@ -15,7 +15,7 @@ class PeriodRow {
 class PeriodList {
   constructor (list) {
     this.periodsShown = list.find('label').nth(0)
-    this.periodsFiltered = list.find('p').nth(0)
+    this.periodsFiltered = this.periodsShown.sibling(0)
     this.firstRow = new PeriodRow(list.find('div.row').nth(1))
   }
 }
