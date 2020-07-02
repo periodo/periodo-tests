@@ -6,6 +6,7 @@ class Menu {
     this.dataSourcesLink = menu.find('a').withExactText('Data sources')
     this.addAuthorityLink = menu.find('a').withExactText('Add authority')
     this.importChangesLink = menu.find('a').withExactText('Import changes')
+    this.submitChangesLink = menu.find('a').withExactText('Submit changes')
   }
 }
 
@@ -50,7 +51,7 @@ class Page {
     this.authorityForm = new AuthorityForm(ReactSelector('AuthorityForm'))
     this.menu = new Menu(ReactSelector('UI:NavigationMenu'))
     this.dataSourceSelect = new Select(ReactSelector('BackendSelector'))
-    this.changeSummary = Selector('div.section').find('li').nth(0)
+    this.changeSummary = Selector('ul').nth(0)
     this.selectAll = ReactSelector('ToggleSelectAll')
     this.continueButton = ReactSelector('UI:Button')
       .withProps('variant', 'primary')
@@ -74,6 +75,13 @@ class Page {
       .typeText(this.backendForm.dataSourceLabelInput, name)
       .typeText(this.backendForm.dataSourceURLInput, url)
       .click(this.backendForm.addButton)
+  }
+
+  async addAuthority(sourceURL) {
+    await t
+      .typeText(this.authorityForm.ldInput, sourceURL)
+      .click(this.authorityForm.ldButton)
+      .click(this.authorityForm.saveButton)
   }
 
   async deleteDataSource(name) {

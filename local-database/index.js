@@ -46,12 +46,10 @@ test('Add an authority to local database', async t => {
       .click(page.menu.addAuthorityLink)
       .expect(page.getURL())
       .contains(`${ host }/?page=backend-add-authority&backendID=local-`)
-      .typeText(
-        page.authorityForm.ldInput,
-        'http://www.worldcat.org/oclc/881466843'
-      )
-      .click(page.authorityForm.ldButton)
-      .click(page.authorityForm.saveButton)
+
+    await page.addAuthority('http://www.worldcat.org/oclc/881466843')
+
+    await t
       .expect(page.getURL())
       .contains(`${ host }/?page=authority-view&backendID=local-`)
       .expect(page.breadcrumbs.nth(0).textContent)
@@ -63,9 +61,39 @@ test('Add an authority to local database', async t => {
   }
 })
 
-test('Import changes', async t => {
+test('Add an authority and push changes', async t => {
+  // TODO: get this test passing on firefox
+  if (! t.browser.alias.startsWith('firefox')) {
+    await t
+      .click(page.menu.addAuthorityLink)
+      .expect(page.getURL())
+      .contains(`${ host }/?page=backend-add-authority&backendID=local-`)
+
+    await page.addAuthority('http://www.worldcat.org/oclc/881466843')
+
+    await t
+      .click(page.menu.submitChangesLink)
+      .expect(page.getURL())
+      .contains(`${ host }/?page=backend-submit-patch&backendID=local-`)
+      .click(page.dataSourceSelect.button)
+      .click(page.dataSourceSelect.option.withExactText(stagingSource))
+      .expect(page.changeSummary.textContent)
+      .contains('Added authority (1)')
+  } else {
+    console.error('Currently broken on Firefox, skipping test')
+  }
+})
+
+test('Add an authority and pull changes', async t => {
   // TODO: get this test passing on safari and firefox
   if (t.browser.alias.startsWith('chrome')) {
+    await t
+      .click(page.menu.addAuthorityLink)
+      .expect(page.getURL())
+      .contains(`${ host }/?page=backend-add-authority&backendID=local-`)
+
+    await page.addAuthority('http://www.worldcat.org/oclc/881466843')
+
     await t
       .click(page.menu.importChangesLink)
       .expect(page.getURL())
@@ -74,6 +102,8 @@ test('Import changes', async t => {
       .click(page.dataSourceSelect.option.withExactText(stagingSource))
       .expect(page.changeSummary.textContent)
       .contains('Added authority (')
+      .expect(page.changeSummary.textContent)
+      .notContains('Removed authority (')
       .click(page.selectAll)
       .click(page.continueButton)
       .click(page.continueButton) // accept changes
