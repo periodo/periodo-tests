@@ -39,7 +39,11 @@ test_firefox test_chrome test_safari: localhost+2.pem localhost+2-key.pem
 	--stop-on-first-fail \
 	$(BROWSER) $(TESTS)
 
+clean:
+	rm -rf node_modules
+	npm install
+
 help:
 	@echo "set base URL with HOST env variable; defaults to $(HOST)"
 
-.PHONY: help test_firefox test_chrome test_safari run
+.PHONY: help test_firefox test_chrome test_safari run clean
