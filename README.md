@@ -6,7 +6,7 @@
 
 Tests run against https://client.staging.perio.do/ by default; to change this set the `HOST` environment variable:
 ```
-HOST=http://0.0.0.0:5002/ make run
+HOST=http://127.0.0.1:5002 make run
 ```
 
 All tests are run by default; to change this set the `TESTS` environment variable:
