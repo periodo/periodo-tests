@@ -16,20 +16,9 @@ fixture('Authentication and authorization')
   .beforeEach(async () => { await waitForReact() })
 
 const ORCID = {
-  emailInput: Selector('input#userId'),
+  usernameInput: Selector('input#username'),
   passwordInput: Selector('input#password'),
-  signInButton: Selector('button#form-sign-in-button'),
-}
-
-const errorHandler = () => {
-  window.addEventListener('error', e => {
-    if (e.message && e.message.includes(
-      "Error: Cannot call method 'postMessage' of null")
-    ) {
-      e.stopImmediatePropagation()
-      window.capturedErrorMessage = e.message
-    }
-  })
+  signInButton: Selector('button#signin-button'),
 }
 
 test('Login via ORCID', async t => {
@@ -38,25 +27,20 @@ test('Login via ORCID', async t => {
     return
   }
 
-  await t
-    .click(page.loginLink)
-    .typeText(ORCID.emailInput, process.env.ORCID_USER)
-    .typeText(ORCID.passwordInput, process.env.ORCID_PASSWORD)
-    .click(ORCID.signInButton)
-
-  await t
-    .expect(page.getURL())
-    .contains(`${ dataHost }/registered?origin=${ encodeURIComponent(host) }&`)
-
-  // postMessage won't work with the testcafe proxy, so we can't get past here
-
-  if (t.browser.alias.startsWith('firefox')) {
-    // On Firefox `opener.postMessage` just silently fails
+  if (t.browser.alias.startsWith('safari')) {
+    console.error('Currently broken on Safari, skipping test')
   } else {
-    // On WebKit `opener` is null due to x-domain restrictions
+
+    console.error(process.env.ORCID_USER)
+
     await t
-     .expect(page.getCapturedErrorMessage())
-     .contains("Error: Cannot call method 'postMessage' of null")
+      .click(page.loginLink)
+      .typeText(ORCID.usernameInput, process.env.ORCID_USER)
+      .typeText(ORCID.passwordInput, process.env.ORCID_PASSWORD)
+      .click(ORCID.signInButton)
+
+    await t
+      .expect(page.alert.textContent)
+      .eql('Successfully authenticated')
   }
 })
-.clientScripts({ content: `(${ errorHandler.toString() })()` })

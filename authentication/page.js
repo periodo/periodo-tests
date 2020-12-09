@@ -1,10 +1,10 @@
-import { Selector, ClientFunction } from 'testcafe'
+import { Selector } from 'testcafe'
+import { ReactSelector } from 'testcafe-react-selectors'
 
 class Page {
   constructor () {
     this.loginLink = Selector('a').withText('Log in with your ORCID')
-    this.getURL = ClientFunction(() => window.location.href)
-    this.getCapturedErrorMessage = ClientFunction(() => window.capturedErrorMessage)
+    this.alert = ReactSelector('UI:Alert')
   }
 }
 

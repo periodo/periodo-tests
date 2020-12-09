@@ -31,12 +31,13 @@ test_safari: BROWSER = safari
 test_firefox: BROWSER = firefox
 
 test_firefox test_chrome test_safari: localhost+2.pem localhost+2-key.pem
-	HOST=$(HOST) npx testcafe \
-	--hostname 127.0.0.1 \
-	--ssl "cert=$(word 1,$^);key=$(word 2,$^);" \
-	--selector-timeout $(TIMEOUT) \
-	--stop-on-first-fail \
-	$(BROWSER) $(TESTS)
+	HOST=$(HOST) \
+	CERT=$(word 1,$^) \
+	KEY=$(word 2,$^) \
+	TIMEOUT=$(TIMEOUT) \
+	BROWSER=$(BROWSER) \
+	TESTS=$(TESTS) \
+	./run-tests
 
 clean:
 	rm -rf node_modules
