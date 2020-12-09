@@ -6,7 +6,7 @@ MKCERT_V := v1.4.1
 
 OS := $(shell uname | tr '[:upper:]' '[:lower:]')
 
-TIMEOUT := 10000
+TIMEOUT := 30000
 
 ifdef CI # continuous integration server
   run: test_chrome    # firefox still broken on travis ci
@@ -28,7 +28,6 @@ localhost+2.pem localhost+2-key.pem: mkcert
 
 test_chrome: BROWSER = chrome
 test_safari: BROWSER = safari
-test_safari: TIMEOUT = 30000 # safari is slow
 test_firefox: BROWSER = firefox
 
 test_firefox test_chrome test_safari: localhost+2.pem localhost+2-key.pem
