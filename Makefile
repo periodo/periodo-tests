@@ -9,12 +9,7 @@ OS := $(shell uname | tr '[:upper:]' '[:lower:]')
 TIMEOUT := 10000
 
 ifdef CI # continuous integration server
-  ifeq ($(OS),darwin) # macos
-  TIMEOUT := 20000    # travis ci macos servers are slow,
-  run: test_chrome    # and safari hangs after the 1st test
-  else                # linux
   run: test_chrome    # firefox still broken on travis ci
-  endif
 else     # development desktop
   ifeq ($(OS),darwin) # macos
   run: test_chrome test_safari test_firefox

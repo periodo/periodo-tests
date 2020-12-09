@@ -1,6 +1,5 @@
 os:
   - linux
-  - osx
 dist: focal
 addons:
   apt:
