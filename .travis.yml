@@ -6,7 +6,6 @@ addons:
     packages:
     - libnss3-tools
   chrome: stable
-  firefox: latest
 services:
   - xvfb
 language: node_js
