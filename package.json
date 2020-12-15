@@ -5,7 +5,7 @@
   "main": "run.js",
   "dependencies": {
     "testcafe": "^1.9.4",
-    "testcafe-react-selectors": "^4.1.1"
+    "testcafe-react-selectors": "^4.1.2"
   },
   "scripts": {
     "test": "make run"
