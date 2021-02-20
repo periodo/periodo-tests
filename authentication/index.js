@@ -31,8 +31,6 @@ test('Login via ORCID', async t => {
     console.error('Currently broken on Safari, skipping test')
   } else {
 
-    console.error(process.env.ORCID_USER)
-
     await t
       .click(page.loginLink)
       .typeText(ORCID.usernameInput, process.env.ORCID_USER)
