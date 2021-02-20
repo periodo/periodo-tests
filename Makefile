@@ -9,7 +9,7 @@ OS := $(shell uname | tr '[:upper:]' '[:lower:]')
 TIMEOUT := 30000
 
 ifdef CI # continuous integration server
-  run: test_chrome    # firefox still broken on travis ci
+  run: test_chrome_headless
 else     # development desktop
   ifeq ($(OS),darwin) # macos
   run: test_chrome test_safari test_firefox
@@ -27,6 +27,7 @@ localhost+2.pem localhost+2-key.pem: mkcert
 	./mkcert localhost 127.0.0.1 ::1
 
 test_chrome: BROWSER = chrome
+test_chrome_headless: BROWSER = chrome:headless
 test_safari: BROWSER = safari
 test_firefox: BROWSER = firefox
 
