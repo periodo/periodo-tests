@@ -13,7 +13,12 @@ jobs:
           node-version: '14'
       - uses: DevExpress/testcafe-action@latest
         with:
-          args: "${{ matrix.browser }} */index.js --hostname localhost --retry-test-pages"
+          args: >-
+            ${{ matrix.browser }}
+            */index.js
+            --hostname localhost
+            --retry-test-pages
+            --selector-timeout 30000
         env:
           HOST: https://client.staging.perio.do
           ORCID_USER: ${{ secrets.ORCID_USER }}
