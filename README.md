@@ -4,7 +4,7 @@ Tests the [PeriodO client](https://github.com/periodo/periodo-client) by running
 
 ![periodo client end-to-end tests status](https://github.com/periodo/periodo-tests/actions/workflows/run-tests.yml/badge.svg)
 
-`make run` runs tests, hopefully.
+`make run` runs the tests.
 
 Tests run against https://client.staging.perio.do/ by default; to change this set the `HOST` environment variable:
 ```
@@ -13,7 +13,7 @@ HOST=http://127.0.0.1:5002 make run
 
 All tests are run by default; to change this set the `TESTS` environment variable:
 ```
-TESTS=browse-*/index.js make run
+TESTS=authentication make run
 ```
 
 If you're on macOS, tests should run on Chrome, Safari, and Firefox.
