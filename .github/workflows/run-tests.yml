@@ -8,7 +8,7 @@ jobs:
       - uses: actions/setup-node@v2
       - uses: DevExpress/testcafe-action@latest
         with:
-          args: "chrome */index.js"
+          args: "chrome,firefox */index.js"
         env:
           HOST: https://client.staging.perio.do
           ORCID_USER: ${{ secrets.ORCID_USER }}
