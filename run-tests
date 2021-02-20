@@ -1,11 +1,9 @@
 #! /bin/bash
 
-if [ -z "$CI" ]; then
-    read -r -p "ORCID username (leave blank to skip auth tests): " ORCID_USER
-    if [ -n "$ORCID_USER" ]; then
-        read -r -s -p "ORCID password: " ORCID_PASSWORD
-        export ORCID_USER ORCID_PASSWORD
-    fi
+read -r -p "ORCID username (leave blank to skip auth tests): " ORCID_USER
+if [ -n "$ORCID_USER" ]; then
+    read -r -s -p "ORCID password: " ORCID_PASSWORD
+    export ORCID_USER ORCID_PASSWORD
 fi
 
 npx testcafe \
