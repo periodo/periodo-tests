@@ -85,8 +85,8 @@ test('Add an authority and push changes', async t => {
 })
 
 test('Add an authority and pull changes', async t => {
-  // TODO: get this test passing on safari and firefox
-  if (t.browser.alias.startsWith('chrome')) {
+  // TODO: get this test passing on firefox
+  if (! t.browser.alias.startsWith('firefox')) {
     await t
       .click(page.menu.addAuthorityLink)
       .expect(page.getURL())
