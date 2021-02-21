@@ -16,6 +16,9 @@ jobs:
           args: >-
             ${{ matrix.browser }}
             */index.js
+            --hostname localhost
+            --retry-test-pages
+            --selector-timeout 30000
         env:
           HOST: https://client.staging.perio.do
           ORCID_USER: ${{ secrets.ORCID_USER }}
