@@ -5,7 +5,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        browser: [ 'chrome', 'firefox' ]
+        browser: [ 'chrome' ]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2

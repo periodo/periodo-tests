@@ -7,41 +7,26 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
     , stagingSource = `staging-${ rando }`
 
 
-const skip = (t, quiet=false) => {
-  if (t.browser.alias.startsWith('firefox') && process.env.CI) {
-    if (! quiet) {
-      console.error('This test is flaky on Firefox under CI; skipping')
-    }
-    return true
-  } else {
-    return false
-  }
-}
-
 fixture('Work with a local database')
   .page(`${ host }/?page=open-backend`)
   .beforeEach(async t => {
-    if (skip(t, true)) return
     await waitForReact()
     await page.addWebDataSource(stagingSource, 'https://data.staging.perio.do')
     await t.click(page.menu.dataSourcesLink)
     await page.addLocalDataSource(testSource)
   })
-  .afterEach(async t => {
-    if (skip(t, true)) return
+  .afterEach(async () => {
     await page.deleteDataSource(testSource)
     await page.deleteDataSource(stagingSource)
   })
 
 test('Add a local database', async t => {
-  if (skip(t)) return
   await t
     .expect(page.getURL())
     .contains(`${ host }/?page=backend-home&backendID=local-`)
 })
 
 test('Add an authority to local database', async t => {
-  if (skip(t)) return
   await t
     .click(page.menu.addAuthorityLink)
     .expect(page.getURL())
@@ -59,7 +44,6 @@ test('Add an authority to local database', async t => {
 })
 
 test('Add an authority and push changes', async t => {
-  if (skip(t)) return
   await t
     .click(page.menu.addAuthorityLink)
     .expect(page.getURL())
@@ -78,7 +62,6 @@ test('Add an authority and push changes', async t => {
 })
 
 test('Add an authority and pull changes', async t => {
-  if (skip(t)) return
   await t
     .click(page.menu.addAuthorityLink)
     .expect(page.getURL())

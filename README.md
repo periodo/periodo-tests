@@ -20,7 +20,7 @@ If you're on macOS, tests should run on Chrome, Safari, and Firefox.
 
 If you're on Linux, tests should run on Chrome and Firefox.
 
-Under continuous integration (Windows), tests are run on Chrome and Firefox.
+Under continuous integration (Windows), tests are run on Chrome only.
 
 To manually specify which browsers to test, set the `BROWSER` environment variable:
 ```
