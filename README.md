@@ -2,7 +2,7 @@
 
 Tests the [PeriodO client](https://github.com/periodo/periodo-client) by running it in an actual browser against a live [PeriodO server](https://github.com/periodo/periodo-server).
 
-![periodo client end-to-end tests status](https://github.com/periodo/periodo-tests/actions/workflows/run-tests.yml/badge.svg)
+[![periodo client end-to-end tests status](https://github.com/periodo/periodo-tests/actions/workflows/run-tests.yml/badge.svg)](https://github.com/periodo/periodo-tests/actions)
 
 `make run` runs the tests.
 
