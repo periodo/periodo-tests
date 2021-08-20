@@ -30,6 +30,7 @@ jobs:
             */index.js
             --hostname localhost
             --retry-test-pages
+            --skip-js-errors
             --selector-timeout 30000
         env:
           CI: true
