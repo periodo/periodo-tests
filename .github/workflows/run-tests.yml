@@ -20,7 +20,7 @@ jobs:
             --hostname localhost
             --retry-test-pages
             --skip-js-errors
-            --selector-timeout 30000
+            --selector-timeout 60000
         env:
           CI: true
           HOST: https://client.staging.perio.do
