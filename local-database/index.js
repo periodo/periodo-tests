@@ -8,7 +8,9 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
 
 
 const skip = t => {
-  if (process.env.CI == 'true' && t.browser.alias.startsWith('firefox')) {
+  if (process.env.CI == 'true' &&
+      (t.browser.alias.startsWith('firefox') ||
+       (process.env.BROWSER || '').startsWith('firefox'))) {
     console.error('Does not work under CI on Firefox, skipping')
     return true
   } else {

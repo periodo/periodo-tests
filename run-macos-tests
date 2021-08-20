@@ -15,7 +15,6 @@ npx testcafe \
     "$TESTS" &
 
 pid=$!
-
+sleep 5
 open -a "$BROWSER" "http://${HOSTNAME}:${PORT1}/browser/connect"
-
 wait $pid
