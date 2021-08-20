@@ -21,6 +21,8 @@ run:
 clean:
 	rm -rf node_modules
 	npm install
+	npm audit fix
+	npx browserslist@latest --update-db
 
 help:
 	@echo "set base URL with HOST env variable; defaults to $(HOST)"
