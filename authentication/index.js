@@ -29,16 +29,22 @@ test('Login via ORCID', async t => {
 
   if (t.browser.alias.startsWith('safari')) {
     console.error('Currently broken on Safari, skipping test')
-  } else {
-
-    await t
-      .click(page.loginLink)
-      .typeText(ORCID.usernameInput, process.env.ORCID_USER)
-      .typeText(ORCID.passwordInput, process.env.ORCID_PASSWORD)
-      .click(ORCID.signInButton)
-
-    await t
-      .expect(page.alert.textContent)
-      .eql('Successfully authenticated')
+    return
   }
+
+  if (t.browser.alias.startsWith('firefox') &&
+      t.browser.os.name.startsWith('Windows')) {
+    console.error('Currently broken on Windows Firefox, skipping test')
+    return
+  }
+
+  await t
+    .click(page.loginLink)
+    .typeText(ORCID.usernameInput, process.env.ORCID_USER)
+    .typeText(ORCID.passwordInput, process.env.ORCID_PASSWORD)
+    .click(ORCID.signInButton)
+
+  await t
+    .expect(page.alert.textContent)
+    .eql('Successfully authenticated')
 })
