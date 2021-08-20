@@ -32,6 +32,7 @@ jobs:
             --retry-test-pages
             --selector-timeout 30000
         env:
+          CI: true
           HOST: https://client.staging.perio.do
           ORCID_USER: ${{ secrets.ORCID_USER }}
           ORCID_PASSWORD: ${{ secrets.ORCID_PASSWORD }}
