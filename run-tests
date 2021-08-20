@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 read -r -p "ORCID username (leave blank to skip auth tests): " ORCID_USER
 if [ -n "$ORCID_USER" ]; then
