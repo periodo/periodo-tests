@@ -7,27 +7,31 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
     , stagingSource = `staging-${ rando }`
 
 
-fixture('Work with a local database')
-  .page(`${ host }/?page=open-backend`)
-  .beforeEach(async t => {
-    await waitForReact()
-    await page.addWebDataSource(stagingSource, 'https://data.staging.perio.do')
-    await t.click(page.menu.dataSourcesLink)
-    await page.addLocalDataSource(testSource)
-  })
-  .afterEach(async () => {
-    await page.deleteDataSource(testSource)
-    await page.deleteDataSource(stagingSource)
-  })
-
 const skip = t => {
   if (process.env.CI == 'true' && t.browser.alias.startsWith('firefox')) {
-    console.error('Does not work under CI on Firefox, skipping test')
+    console.error('Does not work under CI on Firefox, skipping')
     return true
   } else {
     return false
   }
 }
+
+fixture('Work with a local database')
+  .page(`${ host }/?page=open-backend`)
+  .beforeEach(async t => {
+    if (skip(t)) return
+
+    await waitForReact()
+    await page.addWebDataSource(stagingSource, 'https://data.staging.perio.do')
+    await t.click(page.menu.dataSourcesLink)
+    await page.addLocalDataSource(testSource)
+  })
+  .afterEach(async t => {
+    if (skip(t)) return
+
+    await page.deleteDataSource(testSource)
+    await page.deleteDataSource(stagingSource)
+  })
 
 test('Add a local database', async t => {
   if (skip(t)) return
