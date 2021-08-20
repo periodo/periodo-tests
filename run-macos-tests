@@ -1,0 +1,21 @@
+#! /usr/bin/env bash
+
+# for running macos tests to avoid security constraints on a CI server
+
+if [ "$BROWSER" = "chrome" ]; then
+  BROWSER='google chrome'
+fi
+
+npx testcafe \
+    --hostname "$HOSTNAME" \
+    --ports "${PORT1},${PORT2}" \
+    --selector-timeout "$TIMEOUT" \
+    --retry-test-pages \
+    remote \
+    "$TESTS" &
+
+pid=$!
+
+open -a "$BROWSER" "http://${HOSTNAME}:${PORT1}/browser/connect"
+
+wait $pid
