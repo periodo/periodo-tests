@@ -1,5 +1,6 @@
 import { waitForReact } from 'testcafe-react-selectors'
 import page from './page'
+import { browserIs } from '../utils'
 
 const host = process.env.HOST || 'https://client.staging.perio.do'
     , rando = Math.random().toString(36).substr(2, 5)
@@ -8,9 +9,7 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
 
 
 const skip = t => {
-  if (process.env.CI == 'true' &&
-      (t.browser.alias.startsWith('firefox') ||
-       (process.env.BROWSER || '').startsWith('firefox'))) {
+  if (process.env.CI == 'true' && browserIs('firefox', t)) {
     console.error('Does not work under CI on Firefox, skipping')
     return true
   } else {

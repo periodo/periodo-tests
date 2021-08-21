@@ -1,6 +1,7 @@
 import { Selector } from 'testcafe'
 import { waitForReact } from 'testcafe-react-selectors'
 import page from './page'
+import { browserIs } from '../utils'
 
 const host = process.env.HOST || 'https://client.staging.perio.do'
     , dataHost = process.env.DATA_HOST || (
@@ -27,13 +28,12 @@ test('Login via ORCID', async t => {
     return
   }
 
-  if (t.browser.alias.startsWith('safari')) {
+  if (browserIs('safari', t)) {
     console.error('Currently broken on Safari, skipping test')
     return
   }
 
-  if (t.browser.alias.startsWith('firefox') &&
-      t.browser.os.name.startsWith('Windows')) {
+  if (browserIs('firefox', t) && t.browser.os.name.startsWith('Windows')) {
     console.error('Currently broken on Windows Firefox, skipping test')
     return
   }
