@@ -33,13 +33,8 @@ test('Login via ORCID', async t => {
     return
   }
 
-  if (browserIs('firefox', t) && t.browser.os.name.startsWith('Windows')) {
-    console.error('Currently broken on Windows Firefox, skipping test')
-    return
-  }
-
-  if (t.browser.alias.startsWith('remote') && browserIs('chrome', t)) {
-    console.error('Currently broken on remote Chrome, skipping test')
+  if (process.env.CI == 'true') {
+    console.error('Running under CI, skipping test')
     return
   }
 
