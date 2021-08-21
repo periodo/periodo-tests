@@ -3,7 +3,9 @@
 # for running macos tests to avoid security constraints on a CI server
 
 if [ "$BROWSER" = "chrome" ]; then
-  BROWSER='google chrome'
+  APP='google chrome'
+else
+  APP="$BROWSER"
 fi
 
 npx testcafe \
@@ -16,6 +18,6 @@ npx testcafe \
     "$TESTS" &
 
 pid=$!
-sleep 5
-open -a "$BROWSER" "http://${HOSTNAME}:${PORT1}/browser/connect"
+sleep 10
+open -a "$APP" "http://${HOSTNAME}:${PORT1}/browser/connect"
 wait $pid
