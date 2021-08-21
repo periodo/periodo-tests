@@ -11,6 +11,7 @@ npx testcafe \
     --ports "${PORT1},${PORT2}" \
     --selector-timeout "$TIMEOUT" \
     --retry-test-pages \
+    --skip-js-errors \
     remote \
     "$TESTS" &
 
