@@ -1,5 +1,5 @@
 name: end-to-end tests (macos)
-on: [ workflow_dispatch ]
+on: [ push, workflow_dispatch ]
 jobs:
   run-tests:
     runs-on: macos-latest
