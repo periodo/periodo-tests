@@ -19,22 +19,20 @@ run:
 	TESTS=$(TESTS) \
 	./run-tests
 
-run_on_branch:
+start_client:
 	rm -rf periodo-client
-	# checkout branch
 	git clone \
 	--branch $(CLIENT_BRANCH) \
 	--single-branch \
 	https://github.com/periodo/periodo-client.git
-	# start server
 	$(MAKE) -C periodo-client start
-	# run tests
+
+run_on_branch: start_client
 	HOST=http://127.0.0.1:5002 \
 	TIMEOUT=$(TIMEOUT) \
 	BROWSER=$(BROWSER) \
 	TESTS=$(TESTS) \
 	./run-tests
-	# stop server
 	$(MAKE) -C periodo-client stop
 
 clean:
@@ -46,4 +44,4 @@ clean:
 help:
 	@echo "set base URL with HOST env variable; defaults to $(HOST)"
 
-.PHONY: help run run_on_branch clean
+.PHONY: help start_client run run_on_branch clean
