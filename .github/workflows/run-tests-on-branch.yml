@@ -1,0 +1,17 @@
+name: end-to-end tests on a specific client branch
+on:
+  workflow_dispatch:
+    inputs:
+      clientBranch:
+        description: 'Client branch'
+        required: true
+        default: 'master'
+        type: string
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Run on client branch: $CLIENT_BRANCH"
+        env:
+          CLIENT_BRANCH: ${{ github.event.inputs.clientBranch }}
