@@ -4,11 +4,14 @@ import page from './page'
 const host = process.env.HOST || 'https://client.staging.perio.do'
     , backendID = encodeURIComponent('web-https://data.perio.do/')
     , authorityID = 'p0323gx'
+    , fixture_name = 'View authority'
 
-console.log(`Client hosted at ${ host }`)
-console.log('Server hosted at https://data.perio.do/')
+console.log(fixture_name)
+console.log(`  Client hosted at ${ host }`)
+console.log('  Server hosted at https://data.perio.do/')
+console.log()
 
-fixture('View authority')
+fixture(fixture_name)
   .page(`${ host }/?page=authority-view&backendID=${ backendID }&authorityID=${ authorityID }`)
   .beforeEach(async () => { await waitForReact() })
 

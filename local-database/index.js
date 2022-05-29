@@ -6,9 +6,12 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
     , rando = Math.random().toString(36).substr(2, 5)
     , testSource = `test-${ rando }`
     , stagingSource = `staging-${ rando }`
+    , fixture_name = 'Work with a local database'
 
-console.log(`Client hosted at ${ host }`)
-console.log('Server hosted at https://data.staging.perio.do/')
+console.log(fixture_name)
+console.log(`  Client hosted at ${ host }`)
+console.log('  Server hosted at https://data.staging.perio.do/')
+console.log()
 
 const skip = t => {
   if (process.env.CI == 'true' && browserIs('firefox', t)) {
@@ -19,7 +22,7 @@ const skip = t => {
   }
 }
 
-fixture('Work with a local database')
+fixture(fixture_name)
   .page(`${ host }/?page=open-backend`)
   .beforeEach(async t => {
     if (skip(t)) return

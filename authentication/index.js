@@ -10,11 +10,14 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
         : 'https://data.staging.perio.do'
     )
     , backendID = encodeURIComponent(`web-${ dataHost }/`)
+    , fixture_name = 'Authentication and authorization'
 
-console.log(`Client hosted at ${ host }`)
-console.log(`Server hosted at ${ dataHost }`)
+console.log(fixture_name)
+console.log(`  Client hosted at ${ host }`)
+console.log(`  Server hosted at ${ dataHost }`)
+console.log()
 
-fixture('Authentication and authorization')
+fixture(fixture_name)
   .page(`${ host }/?page=backend-edit&backendID=${ backendID }`)
   .beforeEach(async () => { await waitForReact() })
 
