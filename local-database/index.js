@@ -7,6 +7,8 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
     , testSource = `test-${ rando }`
     , stagingSource = `staging-${ rando }`
 
+console.log(`Client hosted at ${ host }`)
+console.log('Server hosted at https://data.staging.perio.do/')
 
 const skip = t => {
   if (process.env.CI == 'true' && browserIs('firefox', t)) {

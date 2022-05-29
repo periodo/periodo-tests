@@ -4,6 +4,9 @@ import page from './page'
 const host = process.env.HOST || 'https://client.staging.perio.do'
     , backendID = encodeURIComponent('web-https://data.perio.do/')
 
+console.log(`Client hosted at ${ host }`)
+console.log('Server hosted at https://data.perio.do/')
+
 fixture('Browse canonical periods')
   .page(`${ host }/?page=backend-home&backendID=${ backendID }`)
   .beforeEach(async () => { await waitForReact() })

@@ -26,6 +26,7 @@ start_client:
 	--single-branch \
 	https://github.com/periodo/periodo-client.git
 	$(MAKE) -C periodo-client start
+	@echo Started serving client branch $(CLIENT_BRANCH)
 
 run_on_branch: start_client
 	HOST=http://127.0.0.1:5002 \

@@ -5,6 +5,9 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
     , backendID = encodeURIComponent('web-https://data.perio.do/')
     , authorityID = 'p0323gx'
 
+console.log(`Client hosted at ${ host }`)
+console.log('Server hosted at https://data.perio.do/')
+
 fixture('View authority')
   .page(`${ host }/?page=authority-view&backendID=${ backendID }&authorityID=${ authorityID }`)
   .beforeEach(async () => { await waitForReact() })

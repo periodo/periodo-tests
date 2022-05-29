@@ -11,6 +11,8 @@ const host = process.env.HOST || 'https://client.staging.perio.do'
     )
     , backendID = encodeURIComponent(`web-${ dataHost }/`)
 
+console.log(`Client hosted at ${ host }`)
+console.log(`Server hosted at ${ dataHost }`)
 
 fixture('Authentication and authorization')
   .page(`${ host }/?page=backend-edit&backendID=${ backendID }`)
