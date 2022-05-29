@@ -13,6 +13,11 @@ jobs:
     strategy:
       matrix:
         browser: [ chrome, firefox ]
+    env:
+      CLIENT_BRANCH: ${{ github.event.inputs.clientBranch }}
+      HOST: http://127.0.0.1:5002
+      ORCID_PASSWORD: ${{ secrets.ORCID_PASSWORD }}
+      ORCID_USER: ${{ secrets.ORCID_USER }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -32,8 +37,3 @@ jobs:
             --skip-js-errors
             --selector-timeout 60000
       - run: make -C periodo-client stop
-        env:
-          CLIENT_BRANCH: ${{ github.event.inputs.clientBranch }}
-          HOST: http://127.0.0.1:5002
-          ORCID_PASSWORD: ${{ secrets.ORCID_PASSWORD }}
-          ORCID_USER: ${{ secrets.ORCID_USER }}
