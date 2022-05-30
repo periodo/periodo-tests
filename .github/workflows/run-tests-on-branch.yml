@@ -5,6 +5,7 @@ on:
       clientBranch:
         description: 'Client branch'
         required: true
+        default: 'master'
         type: string
 jobs:
   run-tests:
