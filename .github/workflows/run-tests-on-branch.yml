@@ -3,6 +3,10 @@ on:
   workflow_dispatch:
     inputs:
       clientBranch:
+      external_ref_id:
+        description: 'Identifier to use for unique run detection'
+        required: true
+        type: string
         description: 'Client branch'
         required: true
         default: 'master'
@@ -19,6 +23,8 @@ jobs:
       ORCID_PASSWORD: ${{ secrets.ORCID_PASSWORD }}
       ORCID_USER: ${{ secrets.ORCID_USER }}
     steps:
+      - name: ${{ github.event.inputs.external_ref_id }}
+        run: echo
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
