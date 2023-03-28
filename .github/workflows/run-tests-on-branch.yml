@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: 3
       - run: make start_client
-      - uses: DevExpress/testcafe-action@latest
+      - uses: DevExpress/testcafe-action@v0.0.6
         with:
           args: >-
             ${{ matrix.browser }}
