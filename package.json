@@ -4,7 +4,7 @@
   "description": "ui-level tests for periodo client",
   "main": "run.js",
   "dependencies": {
-    "testcafe": "^2.5.0",
+    "testcafe": "^2.6.0",
     "testcafe-react-selectors": "^5.0.2"
   },
   "scripts": {
