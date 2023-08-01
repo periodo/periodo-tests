@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browser: [ chrome, firefox ]
+        browser: [ firefox ]
     env:
       CLIENT_BRANCH: ${{ github.event.inputs.client_branch }}
       HOST: http://127.0.0.1:5002

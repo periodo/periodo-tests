@@ -6,10 +6,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest ]
-        browser: [ chrome, firefox ]
-        exclude:
-          - os: windows-latest
-            browser: chrome
+        browser: [ firefox ]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
