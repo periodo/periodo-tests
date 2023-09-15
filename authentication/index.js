@@ -22,6 +22,7 @@ fixture(fixture_name)
   .beforeEach(async () => { await waitForReact() })
 
 const ORCID = {
+  cookieConsentPopupCloseButton: Selector('button.onetrust-close-btn-ui'),
   usernameInput: Selector('input#username'),
   passwordInput: Selector('input#password'),
   signInButton: Selector('button#signin-button'),
@@ -43,8 +44,14 @@ test('Login via ORCID', async t => {
     return
   }
 
+  // wait for the ORCID login page to finish loading
+  await t.click(page.loginLink).wait(3000)
+
+  if (await ORCID.cookieConsentPopupCloseButton.exists) {
+    await t.click(ORCID.cookieConsentPopupCloseButton)
+  }
+
   await t
-    .click(page.loginLink)
     .typeText(ORCID.usernameInput, process.env.ORCID_USER)
     .typeText(ORCID.passwordInput, process.env.ORCID_PASSWORD)
     .click(ORCID.signInButton)
