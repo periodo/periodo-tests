@@ -13,10 +13,14 @@ on:
         type: string
 jobs:
   run-tests:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        browser: [ firefox ]
+        os: [ ubuntu-latest, macos-latest ]
+        browser: [ chrome, firefox , safari ]
+        exclude:
+          - os: ubuntu-latest
+            browser: safari
+    runs-on: ${{ matrix.os }}
     env:
       CLIENT_BRANCH: ${{ github.event.inputs.client_branch }}
       HOST: http://127.0.0.1:5002
