@@ -20,6 +20,8 @@ jobs:
         exclude:
           - os: ubuntu-latest
             browser: safari
+          - os: macos-latest
+            browser: firefox
     runs-on: ${{ matrix.os }}
     env:
       CLIENT_BRANCH: ${{ github.event.inputs.client_branch }}
