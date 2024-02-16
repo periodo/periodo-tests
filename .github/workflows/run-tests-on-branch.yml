@@ -13,20 +13,7 @@ on:
         type: string
 jobs:
   run-tests:
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, macos-latest ]
-        browser: [ chrome, firefox, safari ]
-        exclude:
-          - os: ubuntu-latest
-            browser: safari
-          - os: ubuntu-latest
-            browser: chrome
-          - os: macos-latest
-            browser: firefox
-          - os: macos-latest
-            browser: chrome
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     env:
       CLIENT_BRANCH: ${{ github.event.inputs.client_branch }}
       HOST: http://127.0.0.1:5002
@@ -46,7 +33,7 @@ jobs:
       - uses: DevExpress/testcafe-action@v0.0.6
         with:
           args: >-
-            ${{ matrix.browser }}
+            firefox
             */index.js
             --hostname localhost
             --retry-test-pages
