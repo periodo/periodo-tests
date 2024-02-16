@@ -24,6 +24,8 @@ jobs:
             browser: chrome
           - os: macos-latest
             browser: firefox
+          - os: macos-latest
+            browser: chrome
     runs-on: ${{ matrix.os }}
     env:
       CLIENT_BRANCH: ${{ github.event.inputs.client_branch }}
