@@ -29,11 +29,6 @@ const ORCID = {
 }
 
 test('Login via ORCID', async t => {
-  if (! (process.env.ORCID_USER && process.env.ORCID_PASSWORD)) {
-    console.error('No ORCID_USER or ORCID_PASSWORD, skipping test')
-    return
-  }
-
   if (browserIs('safari', t)) {
     console.error('Currently broken on Safari, skipping test')
     return
@@ -41,6 +36,11 @@ test('Login via ORCID', async t => {
 
   if (process.env.CI == 'true') {
     console.error('Running under CI, skipping test')
+    return
+  }
+
+  if (! (process.env.ORCID_USER && process.env.ORCID_PASSWORD)) {
+    console.error('No ORCID_USER or ORCID_PASSWORD, skipping test')
     return
   }
 
