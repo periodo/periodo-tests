@@ -12,8 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: xvfb-run --server-args="-screen 0 1280x720x24"
-      - run: npx testcafe ${{ matrix.browser }} */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
+      - run: xvfb-run --server-args="-screen 0 1280x720x24" npx testcafe ${{ matrix.browser }} */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
         env:
           CI: true
           HOST: https://client.staging.perio.do

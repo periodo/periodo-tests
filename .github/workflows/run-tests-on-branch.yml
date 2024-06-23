@@ -30,6 +30,5 @@ jobs:
         with:
           python-version: 3
       - run: make start_client
-      - run: xvfb-run --server-args="-screen 0 1280x720x24"
-      - run: npx testcafe firefox */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
+      - run: xvfb-run --server-args="-screen 0 1280x720x24" npx testcafe firefox */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
       - run: make -C periodo-client stop
