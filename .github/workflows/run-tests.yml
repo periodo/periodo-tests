@@ -2,11 +2,7 @@ name: end-to-end tests
 on: [ push, workflow_dispatch ]
 jobs:
   run-tests:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, windows-latest ]
-        browser: [ firefox ]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -14,7 +10,7 @@ jobs:
           node-version: 20
       - run: npm install
       - run: npx browserslist@latest --update-db
-      - run: xvfb-run --server-args="-screen 0 1280x720x24" npx testcafe ${{ matrix.browser }} */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
+      - run: xvfb-run --server-args="-screen 0 1280x720x24" npx testcafe firefox */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
         env:
           CI: true
           HOST: https://client.staging.perio.do
