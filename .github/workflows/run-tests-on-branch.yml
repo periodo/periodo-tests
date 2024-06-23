@@ -25,12 +25,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
       - uses: actions/setup-python@v5
         with:
           python-version: 3
       - run: make start_client
       - run: npm install
       - run: npx browserslist@latest --update-db
-      - run: xvfb-run --server-args="-screen 0 1280x720x24" npx testcafe firefox */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
+      - run: npx testcafe "chrome:headless" */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
       - run: make -C periodo-client stop
