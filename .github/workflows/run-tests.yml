@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - run: npm install
+      - run: npx browserslist@latest --update-db
       - run: xvfb-run --server-args="-screen 0 1280x720x24" npx testcafe ${{ matrix.browser }} */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
         env:
           CI: true
