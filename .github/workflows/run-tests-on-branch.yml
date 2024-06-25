@@ -31,6 +31,6 @@ jobs:
           python-version: 3
       - run: make start_client
       - run: npm install
-      - run: npx browserslist@latest --update-db
-      - run: npx testcafe "chrome:headless" */index.js  --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000
+      - run: npx --yes update-browserslist-db@latest
+      - run: npx testcafe --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000 "chrome:headless" */index.js
       - run: make -C periodo-client stop

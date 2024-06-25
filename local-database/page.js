@@ -65,6 +65,7 @@ class Page {
   async addLocalDataSource(name) {
     await t
       .typeText(this.backendForm.dataSourceLabelInput, name)
+      .setNativeDialogHandler(() => true)
       .click(this.backendForm.addButton)
   }
 

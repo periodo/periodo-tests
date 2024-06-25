@@ -10,20 +10,3 @@ Tests run against https://client.staging.perio.do/ by default; to change this se
 ```
 HOST=http://127.0.0.1:5002 make run
 ```
-
-All tests are run by default; to change this set the `TESTS` environment variable:
-```
-TESTS=authentication make run
-```
-
-If you're on macOS, tests should run on Chrome, Safari, and Firefox.
-
-If you're on Linux, tests should run on Chrome and Firefox.
-
-Under continuous integration (Windows), tests are run on Chrome only.
-
-To manually specify which browsers to test, set the `BROWSER` environment variable:
-```
-BROWSER=safari,firefox
-```
-
