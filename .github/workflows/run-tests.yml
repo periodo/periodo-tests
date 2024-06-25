@@ -10,7 +10,7 @@ jobs:
           node-version: 20
       - run: npm install
       - run: npx --yes update-browserslist-db@latest
-      - run: npx testcafe --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000 "chrome:headless" */index.js
+      - run: npx testcafe --hostname localhost --retry-test-pages --skip-js-errors --selector-timeout 60000 "chrome:headless" browse-periods local-database view-authority
         env:
           CI: true
           HOST: https://client.staging.perio.do
