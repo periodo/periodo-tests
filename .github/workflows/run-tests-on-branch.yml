@@ -5,6 +5,7 @@ on:
       external_ref_id:
         description: 'Identifier to use for unique run detection'
         required: true
+        default: 'manual'
         type: string
       client_branch:
         description: 'Client branch'
