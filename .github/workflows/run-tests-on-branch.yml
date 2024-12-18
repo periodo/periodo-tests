@@ -1,6 +1,6 @@
 name: end-to-end tests on branch
 on:
-  workflow_dispatch:
+  [push, workflow_dispatch]:
     inputs:
       external_ref_id:
         description: 'Identifier to use for unique run detection'
