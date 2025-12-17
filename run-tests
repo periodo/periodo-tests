@@ -8,25 +8,13 @@ if [ "$CI" != "true" ]; then
     fi
 fi
 
-# only test authentication on firefox.
-# it doesn't work on chrome or safari
-# due to limitations of the browser
-# automation framework.
+# RIP firefox
 
 npx testcafe \
     --selector-timeout "${TIMEOUT}" \
     --stop-on-first-fail \
-    firefox authentication
-
-# but, don't test anything else on firefox,
-# because fetching gazetteers will mysteriously
-# fail. this only seems to happen when running
-# under automation.
-
-npx testcafe \
-    --selector-timeout "${TIMEOUT}" \
-    --stop-on-first-fail \
-    chrome browse-periods local-database view-authority
+    "chrome --disable-features=LocalNetworkAccessChecks" \
+    browse-periods local-database view-authority
 
 # do not run tests in parallel on two different
 # browsers, because things get flaky.
@@ -34,4 +22,5 @@ npx testcafe \
 npx testcafe \
     --selector-timeout "${TIMEOUT}" \
     --stop-on-first-fail \
-    safari browse-periods local-database view-authority
+    safari \
+    browse-periods local-database view-authority
